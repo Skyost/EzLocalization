@@ -4,7 +4,7 @@ import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-/// The app localization delegate class.
+/// The ez localization delegate class.
 class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
   /// Contains all supported locales.
   final Iterable<Locale> supportedLocales;
