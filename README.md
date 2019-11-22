@@ -17,7 +17,7 @@ return MaterialApp(
 );
 ```
 
-Then you create a folder named `languages` in your assets directory with the defined languages in it.
+Then you create a folder named `languages` in your `assets` directory with the defined languages in it.
 An example structure could be :
 
 ```
@@ -45,7 +45,7 @@ Then you translate it in `fr.json` :
 }
 ```
 
-Oh and don't forget to add these assets in your ``pubspec.yml` :
+Oh and don't forget to add these assets in your `pubspec.yml` :
 
 ```yml
 flutter:
