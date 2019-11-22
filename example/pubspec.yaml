@@ -1,0 +1,21 @@
+name: ez_localization_example
+description: Demonstrates how to use the ez_localization plugin.
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  ez_localization:
+    path: ../
+
+flutter:
+  uses-material-design: true
+  assets:
+    - "assets/languages/"

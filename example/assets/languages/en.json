@@ -1,0 +1,8 @@
+{
+    "hello": "Bonjour !",
+    "fruits": {
+        "banana": "Banana",
+        "apple": "Apple",
+        "cherry": "Cherry"
+    }
+}
