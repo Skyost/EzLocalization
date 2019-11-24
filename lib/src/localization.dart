@@ -5,13 +5,18 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-/// The function that allows to get the language path according to the specified locale.
+/// Callback allowing to get the language path according to the specified locale.
 typedef String GetPathFunction(Locale locale);
 
-/// The ez localization class.
+const defaultLanguagesPath = 'assets/languages';
+
+/// The EzLocalization class.
 class EzLocalization {
   /// The current locale.
   final Locale locale;
+
+  /// Directory containing all JSON locales.
+  final String path;
 
   /// The get path function.
   final GetPathFunction getPathFunction;
@@ -22,17 +27,19 @@ class EzLocalization {
   /// Creates a new ez localization instance.
   EzLocalization({
     this.locale = const Locale('en'),
-    this.getPathFunction = _defaultGetPathFunction,
+    this.getPathFunction,
+    this.path = defaultLanguagesPath,
   });
 
-  /// Returns the ez localization instance attached to the specified build config.
-  static EzLocalization of(BuildContext context) => Localizations.of<EzLocalization>(context, EzLocalization);
+  /// Returns the EzLocalization instance attached to the specified build config.
+  static EzLocalization of(BuildContext context) =>
+      Localizations.of<EzLocalization>(context, EzLocalization);
 
   /// Loads the localized strings.
   Future<bool> load() async {
     try {
-      String data = await rootBundle.loadString(getPathFunction(locale));
-      Map<String, dynamic> strings = json.decode(data);
+      final data = await rootBundle.loadString(_getPath(locale));
+      final Map<String, dynamic> strings = json.decode(data);
       strings.forEach((String key, dynamic data) => _addValues(key, data));
       return true;
     } catch (exception, stacktrace) {
@@ -43,19 +50,35 @@ class EzLocalization {
   }
 
   /// Returns the string associated to the specified key.
-  String get(String key) => this._strings[key];
+  String get(String key, [List<String> args]) {
+    var value = this._strings[key];
+    if (value == null) {
+      return null;
+    }
+
+    if (args != null) {
+      args.forEach((arg) {
+        value = value.replaceFirst(RegExp(r'{}'), arg);
+      });
+    }
+
+    return value;
+  }
 
   /// The default get path function.
-  static String _defaultGetPathFunction(Locale locale) => 'assets/languages/${locale.languageCode}.json';
+  String _getPath(Locale locale) => getPathFunction != null
+      ? getPathFunction(locale)
+      : '$path/${locale.languageCode}.json';
 
   /// Adds the values to the current map.
   void _addValues(String key, dynamic data) {
-    if(data is Map) {
-      data.forEach((subKey, subData) => _addValues(key + '.' + subKey, subData));
+    if (data is Map) {
+      data.forEach(
+          (subKey, subData) => _addValues(key + '.' + subKey, subData));
       return;
     }
 
-    if(data != null) {
+    if (data != null) {
       _strings[key] = data.toString();
     }
   }
