@@ -9,7 +9,7 @@ It only takes a few steps in order to get EzLocalization to work!
 First, add the following code to your `MaterialApp` definition (usually in `main.dart`):
 
 ```dart
-EzLocalizationDelegate ezLocalization = EzLocalizationDelegate(supportedLocales: [Locale('en'), Locale('fr')]); // The first language is your default language.
+final ezLocalization = EzLocalizationDelegate(supportedLocales: [Locale('en'), Locale('fr')]); // The first language is your default language.
 
 return MaterialApp(
   // ...
@@ -18,6 +18,8 @@ return MaterialApp(
   localeResolutionCallback: ezLocalization.localeResolutionCallback,
 );
 ```
+
+> The definition of `ezLocalization` is best done outside of the `build` method.
 
 Then you create a folder named `languages` in your `assets` directory with the defined languages in it.
 An example structure could be:
