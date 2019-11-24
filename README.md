@@ -60,6 +60,20 @@ flutter:
 
 **That's it!** To get your string you only have to call `EzLocalization.of(context).get('hello')`.
 
+## Nested strings
+
+You can nest translation strings as such:
+
+```json
+{
+  "tabs": {
+    "home": "Home"
+  }
+}
+```
+
+And it can be access using `EzLocalization.of(context).get('tabs.home')`.
+
 ## Arguments
 
 In your translation string, you may add arguments using `{}`:
