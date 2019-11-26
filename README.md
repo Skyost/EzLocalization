@@ -9,7 +9,7 @@ It only takes a few steps in order to get EzLocalization to work!
 First, add the following code to your `MaterialApp` definition (usually in `main.dart`):
 
 ```dart
-final ezLocalization = EzLocalizationDelegate(supportedLocales: [Locale('en'), Locale('fr')]); // The first language is your default language.
+EzLocalizationDelegate ezLocalization = EzLocalizationDelegate(supportedLocales: [Locale('en'), Locale('fr')]); // The first language is your default language.
 
 return MaterialApp(
   // ...
@@ -31,9 +31,9 @@ assets
     └── fr.json
 ```
 
-> You can change from the default path of `assets/languages` by passing `path` to `EzLocalizationDelegate`.
+> You can change from the default path of `assets/languages/$languageCode.json` by passing `getPathFunction` to `EzLocalizationDelegate`.
 
-Here's an example of `en.json`:
+Here's an example of `en.json` :
 
 ```json
 {
@@ -41,7 +41,7 @@ Here's an example of `en.json`:
 }
 ```
 
-And a translated `fr.json`:
+And a translated `fr.json` :
 
 ```json
 {
@@ -62,7 +62,7 @@ flutter:
 
 ## Nested strings
 
-You can nest translation strings as such:
+You can nest translation strings as such :
 
 ```json
 {
@@ -76,15 +76,15 @@ And it can be access using `EzLocalization.of(context).get('tabs.home')`.
 
 ## Arguments
 
-In your translation string, you may add arguments using `{}`:
+In your translation string, you may add arguments using `{}` :
 
 ```json
 {
-  "greeting": "Hello {}, my name is {}!"
+  "greeting": "Hello {target}, my name is {me} !"
 }
 ```
 
-You can then fill them with `EzLocalization.of(context).get('greeting', ['John', 'Bob'])`.
+You can then fill them with `EzLocalization.of(context).get('greeting', {target: 'John', me: 'Bob'})`.
 
 ## Features
 

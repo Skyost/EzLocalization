@@ -9,28 +9,22 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
   /// Contains all supported locales.
   final Iterable<Locale> supportedLocales;
 
-  /// Directory containing all JSON locales.
-  final String path;
-
   /// The get path function.
   final GetPathFunction getPathFunction;
 
   /// Creates a new app localization delegate instance.
   const EzLocalizationDelegate({
     this.supportedLocales = const [Locale('en')],
-    this.getPathFunction,
-    this.path = defaultLanguagesPath,
+    @required this.getPathFunction,
   });
 
   @override
-  bool isSupported(Locale locale) =>
-      _isLocaleSupported(supportedLocales, locale) != null;
+  bool isSupported(Locale locale) => _isLocaleSupported(supportedLocales, locale) != null;
 
   @override
   Future<EzLocalization> load(Locale locale) async {
-    final ezLocalization = EzLocalization(
+    EzLocalization ezLocalization = EzLocalization(
       locale: locale,
-      path: path,
       getPathFunction: getPathFunction,
     );
 
@@ -51,8 +45,7 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
       return supportedLocales.first;
     }
 
-    return _isLocaleSupported(supportedLocales, locale) ??
-        supportedLocales.first;
+    return _isLocaleSupported(supportedLocales, locale) ?? supportedLocales.first;
   }
 
   /// The localization delegates to add in your application.
@@ -65,9 +58,8 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
 
   /// Returns the locale if it's supported by this localization delegate, null otherwise.
   Locale _isLocaleSupported(List<Locale> supportedLocales, Locale locale) {
-    for (final supportedLocale in supportedLocales) {
-      if (supportedLocale.languageCode == locale.languageCode ||
-          supportedLocale.countryCode == locale.countryCode) {
+    for (Locale supportedLocale in supportedLocales) {
+      if (supportedLocale.languageCode == locale.languageCode || supportedLocale.countryCode == locale.countryCode) {
         return supportedLocale;
       }
     }
