@@ -1,7 +1,7 @@
 ## [0.2.0] - Unreleased
 
-* Add arguments
-* Add custom path
+* Added arguments.
+* Some fixes.
 
 ## [0.1.1] - 2019-11-22
 

@@ -15,7 +15,7 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
   /// Creates a new app localization delegate instance.
   const EzLocalizationDelegate({
     this.supportedLocales = const [Locale('en')],
-    @required this.getPathFunction,
+    this.getPathFunction = EzLocalization.defaultGetPathFunction,
   });
 
   @override

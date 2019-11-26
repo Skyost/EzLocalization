@@ -22,7 +22,7 @@ class EzLocalization {
   /// Creates a new ez localization instance.
   EzLocalization({
     this.locale = const Locale('en'),
-    @required this.getPathFunction,
+    this.getPathFunction = defaultGetPathFunction,
   });
 
   /// Returns the EzLocalization instance attached to the specified build config.
@@ -55,6 +55,9 @@ class EzLocalization {
 
     return value;
   }
+
+  /// The default get path function.
+  static String defaultGetPathFunction(Locale locale) => 'assets/languages/${locale.languageCode}.json';
 
   /// Adds the values to the current map.
   void _addValues(String key, dynamic data) {
