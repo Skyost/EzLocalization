@@ -4,5 +4,6 @@
         "banana": "Banane",
         "apple": "Pomme",
         "cherry": "Cerise"
-    }
+    },
+    "format": "Bonjour M. {name}."
 }

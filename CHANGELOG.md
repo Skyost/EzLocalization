@@ -1,4 +1,4 @@
-## [0.2.0] - Unreleased
+## [0.2.0] - 2019-11-30
 
 * Added arguments.
 * Some fixes.

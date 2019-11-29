@@ -34,6 +34,7 @@ class _EzLocalizationDemoApp extends StatelessWidget {
 class _EzLocalizationDemoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print(EzLocalization.of(context).get('format', {'name': 'Bond'}));
     print('If your language is set to French or Spanish, here\'s the word "Hello !" in your language :');
     print(EzLocalization.of(context).get('hello'));
     print('(Otherwise it should display a simple "Hello !".)');
@@ -44,8 +45,12 @@ class _EzLocalizationDemoWidget extends StatelessWidget {
       child: Center(
         child: RichText(
           text: TextSpan(
-            text: 'If your language is set to French or Spanish, here\'s the word "Hello !" in your language :\n',
             children: [
+              TextSpan(
+                text: EzLocalization.of(context).get('format', {'name': 'Bond'}) + '\n\n',
+                style: Theme.of(context).textTheme.body1.copyWith(fontSize: 28, fontWeight: FontWeight.bold),
+              ),
+              TextSpan(text: 'If your language is set to French or Spanish, here\'s the word "Hello !" in your language :\n'),
               TextSpan(
                 text: EzLocalization.of(context).get('hello'),
                 style: Theme.of(context).textTheme.body1.copyWith(fontSize: 18, fontWeight: FontWeight.bold),

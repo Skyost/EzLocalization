@@ -50,7 +50,7 @@ class EzLocalization {
     }
 
     if (args != null) {
-      value = _formatReturnValue(key, args);
+      value = _formatReturnValue(value, args);
     }
 
     return value;
@@ -78,7 +78,7 @@ class EzLocalization {
         value = value.replaceAll('{' + i.toString() + '}', arguments[i].toString());
       }
     } else if (arguments is Map) {
-      arguments.forEach((key, value) => value = value.replaceAll(key.toString(), value.toString()));
+      arguments.forEach((formatKey, formatValue) => value = value.replaceAll('{' + formatKey.toString() + '}', formatValue.toString()));
     }
     return value;
   }
