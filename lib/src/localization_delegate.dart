@@ -4,14 +4,18 @@ import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-/// The ez localization delegate class.
+/// The EzLocalization delegate class.
 class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
   /// Contains all supported locales.
   final Iterable<Locale> supportedLocales;
 
+  /// The get path function.
+  final GetPathFunction getPathFunction;
+
   /// Creates a new app localization delegate instance.
   const EzLocalizationDelegate({
     this.supportedLocales = const [Locale('en')],
+    this.getPathFunction = EzLocalization.defaultGetPathFunction,
   });
 
   @override
@@ -19,16 +23,24 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
 
   @override
   Future<EzLocalization> load(Locale locale) async {
-    EzLocalization appLocalization = EzLocalization(locale: locale);
-    await appLocalization.load();
-    return appLocalization;
+    EzLocalization ezLocalization = EzLocalization(
+      locale: locale,
+      getPathFunction: getPathFunction,
+    );
+
+    await ezLocalization.load();
+
+    return ezLocalization;
   }
 
   @override
   bool shouldReload(LocalizationsDelegate<EzLocalization> old) => false;
 
   /// The default locale resolution callback.
-  Locale localeResolutionCallback(Locale locale, Iterable<Locale> supportedLocales) {
+  Locale localeResolutionCallback(
+    Locale locale,
+    Iterable<Locale> supportedLocales,
+  ) {
     if (locale == null) {
       return supportedLocales.first;
     }

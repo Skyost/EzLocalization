@@ -1,70 +1,100 @@
 # EzLocalization
 
-This little package allows you to setup a localization system with ease and in only a few minutes.
+This package allows you to setup a localization system with ease and in only a few minutes.
 
 ## Getting started
 
-It only takes a few steps in order to get EzLocalization to work !
-First, go where you define your `MaterialApp` (usually in `main.dart`) and add the following code :
+It only takes a few steps in order to get EzLocalization to work!
+
+First, add the following code to your `MaterialApp` definition (usually in `main.dart`):
 
 ```dart
-EzLocalizationDelegate localizationDelegate = EzLocalizationDelegate(supportedLocales: [Locale('en'), Locale('fr')]); // The first language is your default language.
+EzLocalizationDelegate ezLocalization = EzLocalizationDelegate(supportedLocales: [Locale('en'), Locale('fr')]); // The first language is your default language.
+
 return MaterialApp(
-  // title, theme, etc...
-  localizationsDelegates: localizationDelegate.localizationDelegates,
-  supportedLocales: localizationDelegate.supportedLocales,
-  localeResolutionCallback: localizationDelegate.localeResolutionCallback,
+  // ...
+  localizationsDelegates: ezLocalization.localizationDelegates,
+  supportedLocales: ezLocalization.supportedLocales,
+  localeResolutionCallback: ezLocalization.localeResolutionCallback,
 );
 ```
 
+> The definition of `ezLocalization` is best done outside of the `build` method.
+
 Then you create a folder named `languages` in your `assets` directory with the defined languages in it.
-An example structure could be :
+An example structure could be:
 
 ```
 assets
-|
-|------ languages
-        |
-        |--------- en.json
-        |--------- fr.json
+└── languages
+    ├── en.json
+    └── fr.json
 ```
 
-Here's an example of what `en.json` can contain :
+> You can change from the default path of `assets/languages/$languageCode.json` by passing `getPathFunction` to `EzLocalizationDelegate`.
+
+Here's an example of `en.json` :
 
 ```json
 {
-  "hello": "Hello !"
+  "hello": "Hello!"
 }
 ```
 
-Then you translate it in `fr.json` :
+And a translated `fr.json` :
 
 ```json
 {
-  "hello": "Bonjour !"
+  "hello": "Bonjour!"
 }
 ```
 
-Oh and don't forget to add these assets in your `pubspec.yml` :
+Don't forget to add the assets in your `pubspec.yml`:
 
 ```yml
 flutter:
-  # uses-material-design, ...
+  # ...
   assets:
     - "assets/languages/"
 ```
 
-**That's it !** To get your string you only have to call `EzLocalization.of(context).get('hello')`.
+**That's it!** To get your string you only have to call `EzLocalization.of(context).get('hello')`.
+
+## Nested strings
+
+You can nest translation strings as such :
+
+```json
+{
+  "tabs": {
+    "home": "Home"
+  }
+}
+```
+
+And it can be access using `EzLocalization.of(context).get('tabs.home')`.
+
+## Arguments
+
+In your translation string, you may add arguments using `{}` :
+
+```json
+{
+  "greeting": "Hello {target}, my name is {me} !"
+}
+```
+
+You can then fill them with `EzLocalization.of(context).get('greeting', {target: 'John', me: 'Bob'})`.
 
 ## Features
 
-Here are some features :
+Here are some features:
 
 * Easy, lightweight, open-source.
 * MIT licensed.
-* Classes can easily be overridden.
+* Easily extensible.
 
-## Contributions
+## Contributing
 
 You have a lot of options to contribute to this project ! You can :
 

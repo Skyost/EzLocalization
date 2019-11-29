@@ -5,10 +5,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-/// The function that allows to get the language path according to the specified locale.
+/// Callback allowing to get the language path according to the specified locale.
 typedef String GetPathFunction(Locale locale);
 
-/// The ez localization class.
+/// The EzLocalization class.
 class EzLocalization {
   /// The current locale.
   final Locale locale;
@@ -22,10 +22,10 @@ class EzLocalization {
   /// Creates a new ez localization instance.
   EzLocalization({
     this.locale = const Locale('en'),
-    this.getPathFunction = _defaultGetPathFunction,
+    this.getPathFunction = defaultGetPathFunction,
   });
 
-  /// Returns the ez localization instance attached to the specified build config.
+  /// Returns the EzLocalization instance attached to the specified build config.
   static EzLocalization of(BuildContext context) => Localizations.of<EzLocalization>(context, EzLocalization);
 
   /// Loads the localized strings.
@@ -43,20 +43,43 @@ class EzLocalization {
   }
 
   /// Returns the string associated to the specified key.
-  String get(String key) => this._strings[key];
+  String get(String key, [dynamic args]) {
+    String value = this._strings[key];
+    if (value == null) {
+      return null;
+    }
+
+    if (args != null) {
+      value = _formatReturnValue(key, args);
+    }
+
+    return value;
+  }
 
   /// The default get path function.
-  static String _defaultGetPathFunction(Locale locale) => 'assets/languages/${locale.languageCode}.json';
+  static String defaultGetPathFunction(Locale locale) => 'assets/languages/${locale.languageCode}.json';
 
   /// Adds the values to the current map.
   void _addValues(String key, dynamic data) {
-    if(data is Map) {
+    if (data is Map) {
       data.forEach((subKey, subData) => _addValues(key + '.' + subKey, subData));
       return;
     }
 
-    if(data != null) {
+    if (data != null) {
       _strings[key] = data.toString();
     }
+  }
+
+  /// Formats the return value according to the specified arguments.
+  String _formatReturnValue(String value, dynamic arguments) {
+    if (arguments is List) {
+      for (int i = 0; i < arguments.length; i++) {
+        value = value.replaceAll('{' + i.toString() + '}', arguments[i].toString());
+      }
+    } else if (arguments is Map) {
+      arguments.forEach((key, value) => value = value.replaceAll(key.toString(), value.toString()));
+    }
+    return value;
   }
 }
