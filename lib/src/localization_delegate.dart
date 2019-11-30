@@ -12,10 +12,14 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
   /// The get path function.
   final GetPathFunction getPathFunction;
 
+  /// The string to return if the key is not found.
+  final String notFoundString;
+
   /// Creates a new app localization delegate instance.
   const EzLocalizationDelegate({
     this.supportedLocales = const [Locale('en')],
     this.getPathFunction = EzLocalization.defaultGetPathFunction,
+    this.notFoundString,
   });
 
   @override
@@ -26,6 +30,7 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
     EzLocalization ezLocalization = EzLocalization(
       locale: locale,
       getPathFunction: getPathFunction,
+      notFoundString: notFoundString,
     );
 
     await ezLocalization.load();

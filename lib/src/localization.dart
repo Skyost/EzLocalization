@@ -16,13 +16,17 @@ class EzLocalization {
   /// The get path function.
   final GetPathFunction getPathFunction;
 
+  /// The string to return if the key is not found.
+  final String notFoundString;
+
   /// The localized strings.
-  Map<String, String> _strings = HashMap();
+  final Map<String, String> _strings = HashMap();
 
   /// Creates a new ez localization instance.
   EzLocalization({
     this.locale = const Locale('en'),
     this.getPathFunction = defaultGetPathFunction,
+    this.notFoundString,
   });
 
   /// Returns the EzLocalization instance attached to the specified build config.
@@ -46,7 +50,7 @@ class EzLocalization {
   String get(String key, [dynamic args]) {
     String value = this._strings[key];
     if (value == null) {
-      return null;
+      return notFoundString;
     }
 
     if (args != null) {
