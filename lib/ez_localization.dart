@@ -3,3 +3,4 @@
 
 export 'package:ez_localization/src/localization.dart';
 export 'package:ez_localization/src/localization_delegate.dart';
+export 'package:ez_localization/src/widget.dart';

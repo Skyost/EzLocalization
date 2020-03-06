@@ -1,6 +1,13 @@
-## [0.2.1] - Unreleased
+## [0.2.1+1] - 2020-03-06
 
-* Added the possibility to return a string if the given translation is not found.
+* Updated README.
+* Updated dependencies.
+* Added an `EzLocalizationBuilder` widget.
+
+## [0.2.1] - 2020-02-04
+
+* Added the ability to return a string if the given translation is not found.
+* Updated README (added a link to Updating the iOS app bundle on flutter.dev).
 
 ## [0.2.0] - 2019-11-30
 

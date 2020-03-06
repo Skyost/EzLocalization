@@ -7,27 +7,30 @@ void main() => runApp(_EzLocalizationDemoApp());
 /// The demo material app.
 class _EzLocalizationDemoApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    EzLocalizationDelegate localizationDelegate = EzLocalizationDelegate(
-      supportedLocales: [
-        Locale('en'),
-        Locale('fr'),
-        Locale('es'),
-      ],
-    );
-    return MaterialApp(
-      title: 'EzLocalization Demo',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('EzLocalization Demo'),
+  Widget build(BuildContext context) => EzLocalizationBuilder(
+        delegateBuilder: createEzLocalizationDelegate,
+        builder: (context, localizationDelegate) => MaterialApp(
+          title: 'EzLocalization Demo',
+          home: Scaffold(
+            appBar: AppBar(
+              title: Text('EzLocalization Demo'),
+            ),
+            body: _EzLocalizationDemoWidget(),
+          ),
+          localizationsDelegates: localizationDelegate.localizationDelegates,
+          supportedLocales: localizationDelegate.supportedLocales,
+          localeResolutionCallback: localizationDelegate.localeResolutionCallback,
         ),
-        body: _EzLocalizationDemoWidget(),
-      ),
-      localizationsDelegates: localizationDelegate.localizationDelegates,
-      supportedLocales: localizationDelegate.supportedLocales,
-      localeResolutionCallback: localizationDelegate.localeResolutionCallback,
-    );
-  }
+      );
+
+  /// Allows to create the localization delegate.
+  EzLocalizationDelegate createEzLocalizationDelegate() => EzLocalizationDelegate(
+        supportedLocales: [
+          Locale('en'),
+          Locale('fr'),
+          Locale('es'),
+        ],
+      );
 }
 
 /// The main demo widget.

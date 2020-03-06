@@ -1,12 +1,19 @@
 # EzLocalization
 
-This package allows you to setup a localization system with ease and in only a few minutes.
+This package allows you to setup a powerful localization system with ease and in only a few minutes.
+
+## Features
+
+Here are some features:
+
+* Easy, lightweight, open-source.
+* MIT licensed.
+* Easily extensible.
 
 ## Getting started
 
-It only takes a few steps in order to get EzLocalization to work!
-
-First, add the following code to your `MaterialApp` definition (usually in `main.dart`):
+It only takes a few steps in order to get EzLocalization to work !  
+First, add the following code to your `MaterialApp` definition (usually in `main.dart`) :
 
 ```dart
 EzLocalizationDelegate ezLocalization = EzLocalizationDelegate(supportedLocales: [Locale('en'), Locale('fr')]); // The first language is your default language.
@@ -20,9 +27,10 @@ return MaterialApp(
 ```
 
 > The definition of `ezLocalization` is best done outside of the `build` method.
+> If you want, you can use the `EzLocalizationBuilder` which is an useful widget that does all of this for you.
 
 Then you create a folder named `languages` in your `assets` directory with the defined languages in it.
-An example structure could be:
+An example structure could be :
 
 ```
 assets
@@ -37,7 +45,7 @@ Here's an example of `en.json` :
 
 ```json
 {
-  "hello": "Hello!"
+  "hello": "Hello !"
 }
 ```
 
@@ -45,11 +53,11 @@ And a translated `fr.json` :
 
 ```json
 {
-  "hello": "Bonjour!"
+  "hello": "Bonjour !"
 }
 ```
 
-Don't forget to add the assets in your `pubspec.yml`:
+Don't forget to add the assets in your `pubspec.yml` :
 
 ```yml
 flutter:
@@ -88,13 +96,10 @@ You can then fill them with `EzLocalization.of(context).get('greeting', {target:
 
 > Instead of a map you can pass a list and get your arguments by their indexes !
 
-## Features
+## Updating the iOS app bundle
 
-Here are some features:
-
-* Easy, lightweight, open-source.
-* MIT licensed.
-* Easily extensible.
+See [the official flutter.dev documentation](https://flutter.dev/docs/development/accessibility-and-localization/internationalization#appendix-updating-the-ios-app-bundle)
+about updating the iOS app bundle.
 
 ## Contributing
 
