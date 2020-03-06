@@ -92,7 +92,7 @@ In your translation string, you may add arguments using `{}` :
 }
 ```
 
-You can then fill them with `EzLocalization.of(context).get('greeting', {target: 'John', me: 'Bob'})`.
+You can then fill them with `EzLocalization.of(context).get('greeting', {'target': 'John', 'me': 'Bob'})`.
 
 > Instead of a map you can pass a list and get your arguments by their indexes !
 
