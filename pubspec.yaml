@@ -1,10 +1,10 @@
 name: ez_localization
 description: Setup a powerful localization system in your flutter application quickly and easily.
-version: 0.2.1+1
+version: 0.2.2
 homepage: https://github.com/Skyost/EzLocalization
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:

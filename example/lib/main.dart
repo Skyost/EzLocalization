@@ -37,11 +37,11 @@ class _EzLocalizationDemoApp extends StatelessWidget {
 class _EzLocalizationDemoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print(EzLocalization.of(context).get('format', {'name': 'Bond'}));
+    print(context.getString('format', {'name': 'Bond'}));
     print('If your language is set to French or Spanish, here\'s the word "Hello !" in your language :');
-    print(EzLocalization.of(context).get('hello'));
+    print(context.getString('hello'));
     print('(Otherwise it should display a simple "Hello !".)');
-    print('Oh, and here\'s an apple : ' + EzLocalization.of(context).get('fruits.apple') + '.');
+    print('Oh, and here\'s an apple : ' + context.getString('fruits.apple') + '.');
 
     return Padding(
       padding: EdgeInsets.all(8),
@@ -50,16 +50,16 @@ class _EzLocalizationDemoWidget extends StatelessWidget {
           text: TextSpan(
             children: [
               TextSpan(
-                text: EzLocalization.of(context).get('format', {'name': 'Bond'}) + '\n\n',
+                text: context.getString('format', {'name': 'Bond'}) + '\n\n',
                 style: Theme.of(context).textTheme.body1.copyWith(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               TextSpan(text: 'If your language is set to French or Spanish, here\'s the word "Hello !" in your language :\n'),
               TextSpan(
-                text: EzLocalization.of(context).get('hello'),
+                text: context.getString('hello'),
                 style: Theme.of(context).textTheme.body1.copyWith(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               TextSpan(text: '\n(Otherwise it should display a simple "Hello !".)\n\n'),
-              TextSpan(text: 'Oh, and here\'s an apple : ' + EzLocalization.of(context).get('fruits.apple') + '.'),
+              TextSpan(text: 'Oh, and here\'s an apple : ' + context.getString('fruits.apple') + '.'),
             ],
             style: Theme.of(context).textTheme.body1.copyWith(fontSize: 18),
           ),

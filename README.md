@@ -96,6 +96,9 @@ You can then fill them with `EzLocalization.of(context).get('greeting', {'target
 
 > Instead of a map you can pass a list and get your arguments by their indexes !
 
+An extension on `BuildContext` is also available to get your localized strings :
+`context.getString('greeting', {'target': 'John', 'me': 'Bob'})`.
+
 ## Updating the iOS app bundle
 
 See [the official flutter.dev documentation](https://flutter.dev/docs/development/accessibility-and-localization/internationalization#appendix-updating-the-ios-app-bundle)

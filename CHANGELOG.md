@@ -1,3 +1,8 @@
+## [0.2.2] - 2020-04-21
+
+* Added an extension that allows to easily get a localized string.
+* Updated Dart version.
+
 ## [0.2.1+1] - 2020-03-06
 
 * Updated README.
