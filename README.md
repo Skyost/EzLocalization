@@ -26,9 +26,6 @@ return MaterialApp(
 );
 ```
 
-> The definition of `ezLocalization` is best done outside of the `build` method.
-> If you want, you can use the `EzLocalizationBuilder` which is an useful widget that does all of this for you.
-
 Then you create a folder named `languages` in your `assets` directory with the defined languages in it.
 An example structure could be :
 
@@ -38,8 +35,6 @@ assets
     ├── en.json
     └── fr.json
 ```
-
-> You can change from the default path of `assets/languages/$languageCode.json` by passing `getPathFunction` to `EzLocalizationDelegate`.
 
 Here's an example of `en.json` :
 
@@ -66,9 +61,45 @@ flutter:
     - "assets/languages/"
 ```
 
-**That's it!** To get your string you only have to call `EzLocalization.of(context).get('hello')`.
+**That's it !** To get your string you only have to call `EzLocalization.of(context).get('hello')`.
 
-## Nested strings
+## Advanced
+
+### Extension method
+
+With the extension method, it's even easier to get a localized string !
+The only thing you have to do is to replace `EzLocalization.of(context).get('key')` by `context.getString('key')`.
+
+_You may have to manually import EzLocalization in your file._
+
+### Builder widget
+
+EzLocalization provides a builder widget called `EzLocalizationBuilder`. You can use it as such :
+
+```dart
+EzLocalizationBuilder(
+  delegate: EzLocalizationDelegate(
+    supportedLocales: [
+      Locale('en'),
+      Locale('fr'),
+      Locale('es'),
+    ],
+  ),
+  builder: (context, localizationDelegate) => MaterialApp(
+    title: 'Beautifully localized app',
+    home: MyMainWidget(),
+    localizationsDelegates: localizationDelegate.localizationDelegates,
+    supportedLocales: localizationDelegate.supportedLocales,
+    localeResolutionCallback: localizationDelegate.localeResolutionCallback,
+  ),
+);
+```
+
+It has two advantages :
+* It helps reducing boilerplate.
+* You can dynamically change the current locale using `EzLocalizationBuilder.of(context).changeLocale(yourLocale)`.
+
+### Nested strings
 
 You can nest translation strings as such :
 
@@ -82,7 +113,7 @@ You can nest translation strings as such :
 
 And it can be access using `EzLocalization.of(context).get('tabs.home')`.
 
-## Arguments
+### Format arguments
 
 In your translation string, you may add arguments using `{}` :
 
@@ -93,13 +124,16 @@ In your translation string, you may add arguments using `{}` :
 ```
 
 You can then fill them with `EzLocalization.of(context).get('greeting', {'target': 'John', 'me': 'Bob'})`.
+Also, instead of a map you can pass a list and get your arguments by their indexes.
 
-> Instead of a map you can pass a list and get your arguments by their indexes !
+### Change the files path
 
-An extension on `BuildContext` is also available to get your localized strings :
-`context.getString('greeting', {'target': 'John', 'me': 'Bob'})`.
+You can change from the default path of `assets/languages/$languageCode.json` by passing `getPathFunction`
+to `EzLocalizationDelegate`. You will then have to provide a valid asset path according to the specified locale.
 
-## Updating the iOS app bundle
+Don't forget to update your `assets` entry in your pubspec !
+
+### Updating the iOS app bundle
 
 See [the official flutter.dev documentation](https://flutter.dev/docs/development/accessibility-and-localization/internationalization#appendix-updating-the-ios-app-bundle)
 about updating the iOS app bundle.
