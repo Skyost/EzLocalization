@@ -7,7 +7,7 @@ packages:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.14.11"
+    version: "1.14.12"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -24,7 +24,7 @@ packages:
       name: intl
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.16.0"
+    version: "0.16.1"
   meta:
     dependency: transitive
     description:
@@ -59,4 +59,4 @@ packages:
     source: hosted
     version: "2.0.8"
 sdks:
-  dart: ">=2.2.2 <3.0.0"
+  dart: ">=2.6.0 <3.0.0"

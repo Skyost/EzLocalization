@@ -4,32 +4,49 @@ import 'package:flutter/material.dart';
 /// A simple but useful widget that allows to load EzLocalization easier.
 class EzLocalizationBuilder extends StatefulWidget {
   /// The delegate builder.
-  final EzLocalizationDelegate Function() delegateBuilder;
+  final EzLocalizationDelegate delegate;
 
   /// The widget builder.
   final Widget Function(BuildContext context, EzLocalizationDelegate ezLocalizationDelegate) builder;
 
   /// Creates a new EzLocalization builder instance.
   const EzLocalizationBuilder({
-    this.delegateBuilder,
+    this.delegate = const EzLocalizationDelegate(),
     @required this.builder,
   });
 
   @override
-  State<StatefulWidget> createState() => _EzLocalizationBuilderState();
+  State<StatefulWidget> createState() => EzLocalizationBuilderState();
+
+  /// Allows to change the preferred locale (if using the builder).
+  static EzLocalizationBuilderState of(BuildContext context) => context.findAncestorStateOfType<EzLocalizationBuilderState>();
 }
 
 /// The EzLocalization builder state.
-class _EzLocalizationBuilderState extends State<EzLocalizationBuilder> {
+class EzLocalizationBuilderState extends State<EzLocalizationBuilder> {
   /// The current EzLocalization delegate.
-  EzLocalizationDelegate ezLocalizationDelegate;
+  EzLocalizationDelegate _ezLocalizationDelegate;
 
   @override
   void initState() {
     super.initState();
-    ezLocalizationDelegate = widget.delegateBuilder == null ? EzLocalizationDelegate() : widget.delegateBuilder();
+    _ezLocalizationDelegate = widget.delegate;
   }
 
   @override
-  Widget build(BuildContext context) => widget.builder(context, ezLocalizationDelegate);
+  Widget build(BuildContext context) => widget.builder(context, _ezLocalizationDelegate);
+
+  /// Allows to change the preferred locale.
+  void changeLocale(Locale locale) {
+    if(mounted) {
+      setState(() {
+        _ezLocalizationDelegate = EzLocalizationDelegate(
+          supportedLocales: _ezLocalizationDelegate.supportedLocales,
+          getPathFunction: _ezLocalizationDelegate.getPathFunction,
+          notFoundString: _ezLocalizationDelegate.notFoundString,
+          locale: locale,
+        );
+      });
+    }
+  }
 }
