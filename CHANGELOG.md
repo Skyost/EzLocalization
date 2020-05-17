@@ -1,3 +1,8 @@
+## [0.3.0] - 2020-05-17
+
+* Added the ability to change the current locale.
+* Various fixes and improvements.
+
 ## [0.2.2] - 2020-04-21
 
 * Added an extension that allows to easily get a localized string.
