@@ -30,7 +30,8 @@ class EzLocalization {
   });
 
   /// Returns the EzLocalization instance attached to the specified build config.
-  static EzLocalization? of(BuildContext context) => Localizations.of<EzLocalization>(context, EzLocalization);
+  static EzLocalization? of(BuildContext context) =>
+      Localizations.of<EzLocalization>(context, EzLocalization);
 
   /// Loads the localized strings.
   Future<bool> load() async {
@@ -61,12 +62,14 @@ class EzLocalization {
   }
 
   /// The default get path function.
-  static String defaultGetPathFunction(Locale locale) => 'assets/languages/${locale.languageCode}.json';
+  static String defaultGetPathFunction(Locale locale) =>
+      'assets/languages/${locale.languageCode}.json';
 
   /// Adds the values to the current map.
   void _addValues(String key, dynamic data) {
     if (data is Map) {
-      data.forEach((subKey, subData) => _addValues(key + '.' + subKey, subData));
+      data.forEach(
+          (subKey, subData) => _addValues(key + '.' + subKey, subData));
       return;
     }
 
@@ -79,10 +82,12 @@ class EzLocalization {
   String _formatReturnValue(String value, dynamic arguments) {
     if (arguments is List) {
       for (int i = 0; i < arguments.length; i++) {
-        value = value.replaceAll('{' + i.toString() + '}', arguments[i].toString());
+        value =
+            value.replaceAll('{' + i.toString() + '}', arguments[i].toString());
       }
     } else if (arguments is Map) {
-      arguments.forEach((formatKey, formatValue) => value = value.replaceAll('{' + formatKey.toString() + '}', formatValue.toString()));
+      arguments.forEach((formatKey, formatValue) => value = value.replaceAll(
+          '{' + formatKey.toString() + '}', formatValue.toString()));
     }
     return value;
   }
