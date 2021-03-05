@@ -1,3 +1,7 @@
+## [1.0.0] - 2021-03-05
+
+* Migrated to null safety.
+
 ## [0.3.0+1] - 2020-08-05
 
 * Updated README and ran `dartfmt` on the _lib_ folder.
