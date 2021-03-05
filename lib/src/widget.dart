@@ -7,28 +7,25 @@ class EzLocalizationBuilder extends StatefulWidget {
   final EzLocalizationDelegate delegate;
 
   /// The widget builder.
-  final Widget Function(
-          BuildContext context, EzLocalizationDelegate ezLocalizationDelegate)
-      builder;
+  final Widget Function(BuildContext context, EzLocalizationDelegate ezLocalizationDelegate) builder;
 
   /// Creates a new EzLocalization builder instance.
   const EzLocalizationBuilder({
     this.delegate = const EzLocalizationDelegate(),
-    @required this.builder,
+    required this.builder,
   });
 
   @override
   State<StatefulWidget> createState() => EzLocalizationBuilderState();
 
   /// Allows to change the preferred locale (if using the builder).
-  static EzLocalizationBuilderState of(BuildContext context) =>
-      context.findAncestorStateOfType<EzLocalizationBuilderState>();
+  static EzLocalizationBuilderState? of(BuildContext context) => context.findAncestorStateOfType<EzLocalizationBuilderState>();
 }
 
 /// The EzLocalization builder state.
 class EzLocalizationBuilderState extends State<EzLocalizationBuilder> {
   /// The current EzLocalization delegate.
-  EzLocalizationDelegate _ezLocalizationDelegate;
+  late EzLocalizationDelegate _ezLocalizationDelegate;
 
   @override
   void initState() {
@@ -37,8 +34,7 @@ class EzLocalizationBuilderState extends State<EzLocalizationBuilder> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      widget.builder(context, _ezLocalizationDelegate);
+  Widget build(BuildContext context) => widget.builder(context, _ezLocalizationDelegate);
 
   /// Allows to change the preferred locale.
   void changeLocale(Locale locale) {

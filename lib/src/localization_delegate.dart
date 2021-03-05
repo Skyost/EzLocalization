@@ -13,10 +13,10 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
   final GetPathFunction getPathFunction;
 
   /// The string to return if the key is not found.
-  final String notFoundString;
+  final String? notFoundString;
 
   /// The locale to force (if specified, not recommended except under special circumstances).
-  final Locale locale;
+  final Locale? locale;
 
   /// Creates a new app localization delegate instance.
   const EzLocalizationDelegate({
@@ -27,8 +27,7 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
   });
 
   @override
-  bool isSupported(Locale locale) =>
-      _isLocaleSupported(supportedLocales, locale) != null;
+  bool isSupported(Locale locale) => _isLocaleSupported(supportedLocales, locale) != null;
 
   @override
   Future<EzLocalization> load(Locale locale) async {
@@ -47,19 +46,18 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
 
   /// The default locale resolution callback.
   Locale localeResolutionCallback(
-    Locale locale,
+    Locale? locale,
     Iterable<Locale> supportedLocales,
   ) {
     if (this.locale != null) {
-      return this.locale;
+      return this.locale!;
     }
 
     if (locale == null) {
       return supportedLocales.first;
     }
 
-    return _isLocaleSupported(supportedLocales, locale) ??
-        supportedLocales.first;
+    return _isLocaleSupported(supportedLocales, locale) ?? supportedLocales.first;
   }
 
   /// The localization delegates to add in your application.
@@ -71,10 +69,9 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
       ];
 
   /// Returns the locale if it's supported by this localization delegate, null otherwise.
-  Locale _isLocaleSupported(List<Locale> supportedLocales, Locale locale) {
+  Locale? _isLocaleSupported(Iterable<Locale> supportedLocales, Locale locale) {
     for (Locale supportedLocale in supportedLocales) {
-      if (supportedLocale.languageCode == locale.languageCode ||
-          supportedLocale.countryCode == locale.countryCode) {
+      if (supportedLocale.languageCode == locale.languageCode || supportedLocale.countryCode == locale.countryCode) {
         return supportedLocale;
       }
     }
