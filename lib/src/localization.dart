@@ -10,6 +10,9 @@ typedef String GetPathFunction(Locale locale);
 
 /// The EzLocalization class.
 class EzLocalization {
+  /// The default [notFoundString].
+  static const DEFAULT_NOT_FOUND_STRING = '(?)';
+
   /// The current locale.
   final Locale locale;
 

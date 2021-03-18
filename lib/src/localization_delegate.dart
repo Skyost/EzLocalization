@@ -22,7 +22,7 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
   const EzLocalizationDelegate({
     this.supportedLocales = const [Locale('en')],
     this.getPathFunction = EzLocalization.defaultGetPathFunction,
-    this.notFoundString = '(?)',
+    this.notFoundString = EzLocalization.DEFAULT_NOT_FOUND_STRING,
     this.locale,
   });
 

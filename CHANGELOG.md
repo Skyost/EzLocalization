@@ -1,3 +1,7 @@
+## [1.0.0+2] - 2021-03-18
+
+* You can get the default `notFoundString` by calling `EzLocalization.DEFAULT_NOT_FOUND_STRING`.
+
 ## [1.0.0+1] - 2021-03-18
 
 * `notFoundString` is now non null. This means that `getString` methods always return a `String` (and not a `String?` anymore).
