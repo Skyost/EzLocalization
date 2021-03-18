@@ -1,3 +1,7 @@
+## [1.0.0+1] - 2021-03-18
+
+* `notFoundString` is now non null. This means that `getString` methods always return a `String` (and not a `String?` anymore).
+
 ## [1.0.0] - 2021-03-05
 
 * Migrated to null safety.

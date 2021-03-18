@@ -13,7 +13,7 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
   final GetPathFunction getPathFunction;
 
   /// The string to return if the key is not found.
-  final String? notFoundString;
+  final String notFoundString;
 
   /// The locale to force (if specified, not recommended except under special circumstances).
   final Locale? locale;
@@ -22,7 +22,7 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
   const EzLocalizationDelegate({
     this.supportedLocales = const [Locale('en')],
     this.getPathFunction = EzLocalization.defaultGetPathFunction,
-    this.notFoundString,
+    this.notFoundString = '(?)',
     this.locale,
   });
 
