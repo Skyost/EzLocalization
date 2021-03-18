@@ -61,14 +61,14 @@ flutter:
     - "assets/languages/"
 ```
 
-**That's it !** To get your string you only have to call `EzLocalization.of(context).get('hello')`.
+**That's it !** To get your string you only have to call `EzLocalization.of(context)!.get('hello')`.
 
 ## Advanced
 
 ### Extension method
 
 With the extension method, it's even easier to get a localized string !
-The only thing you have to do is to replace `EzLocalization.of(context).get('key')` by `context.getString('key')`.
+The only thing you have to do is to replace `EzLocalization.of(context)!.get('key')` by `context.getString('key')`.
 
 _You may have to manually import EzLocalization in your file._
 
@@ -97,7 +97,7 @@ EzLocalizationBuilder(
 
 It has two advantages :
 * It helps reducing boilerplate.
-* You can dynamically change the current locale using `EzLocalizationBuilder.of(context).changeLocale(yourLocale)`.
+* You can dynamically change the current locale using `EzLocalizationBuilder.of(context)!.changeLocale(yourLocale)`.
 
 ### Nested strings
 
@@ -111,7 +111,7 @@ You can nest translation strings as such :
 }
 ```
 
-And it can be access using `EzLocalization.of(context).get('tabs.home')`.
+And it can be access using `EzLocalization.of(context)!.get('tabs.home')`.
 
 ### Format arguments
 
@@ -123,7 +123,7 @@ In your translation string, you may add arguments using `{}` :
 }
 ```
 
-You can then fill them with `EzLocalization.of(context).get('greeting', {'target': 'John', 'me': 'Bob'})`.
+You can then fill them with `EzLocalization.of(context)!.get('greeting', {'target': 'John', 'me': 'Bob'})`.
 Also, instead of a map you can pass a list and get your arguments by their indexes.
 
 ### Change the files path
