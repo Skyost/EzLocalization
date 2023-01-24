@@ -77,7 +77,7 @@ _You may have to manually import EzLocalization in your file._
 EzLocalization provides a builder widget called `EzLocalizationBuilder`. You can use it as such :
 
 ```dart
-EzLocalizationBuilder(
+const EzLocalizationBuilder(
   delegate: EzLocalizationDelegate(
     supportedLocales: [
       Locale('en'),
