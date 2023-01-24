@@ -1,4 +1,5 @@
 import 'package:ez_localization/ez_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// First plugin test method.
@@ -8,7 +9,7 @@ void main() => runApp(_EzLocalizationDemoApp());
 class _EzLocalizationDemoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => EzLocalizationBuilder(
-        delegate: EzLocalizationDelegate(
+        delegate: const EzLocalizationDelegate(
           supportedLocales: [
             Locale('en'),
             Locale('fr'),
@@ -19,14 +20,13 @@ class _EzLocalizationDemoApp extends StatelessWidget {
           title: 'EzLocalization Demo',
           home: Scaffold(
             appBar: AppBar(
-              title: Text('EzLocalization Demo'),
+              title: const Text('EzLocalization Demo'),
             ),
             body: _EzLocalizationDemoWidget(),
           ),
           localizationsDelegates: localizationDelegate.localizationDelegates,
           supportedLocales: localizationDelegate.supportedLocales,
-          localeResolutionCallback:
-              localizationDelegate.localeResolutionCallback,
+          localeResolutionCallback: localizationDelegate.localeResolutionCallback,
         ),
       );
 }
@@ -35,18 +35,17 @@ class _EzLocalizationDemoApp extends StatelessWidget {
 class _EzLocalizationDemoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print(context.getString('format', {'name': 'Bond'}));
-    print(
-        'If your language is set to French or Spanish, here\'s the word "Hello !" in your language :');
-    print(context.getString('hello'));
-    print('(Otherwise it should display a simple "Hello !".)');
-    print('Oh, and here\'s an apple : ' +
-        context.getString('fruits.apple')! +
-        '.');
+    if (kDebugMode) {
+      print(context.getString('format', {'name': 'Bond'}));
+      print('If your language is set to French or Spanish, here\'s the word "Hello !" in your language :');
+      print(context.getString('hello'));
+      print('(Otherwise it should display a simple "Hello !".)');
+      print('Oh, and here\'s an apple : ${context.getString('fruits.apple')}.');
+    }
 
     Locale nextLocale = _getNextLocale(context)!;
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -56,25 +55,18 @@ class _EzLocalizationDemoWidget extends StatelessWidget {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: context.getString('format', {'name': 'Bond'})! + '\n\n',
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  text: '${context.getString('format', {'name': 'Bond'})}\n\n',
+                  style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
-                TextSpan(
-                    text:
-                        'If your language is set to French or Spanish, here\'s the word "Hello !" in your language :\n'),
+                const TextSpan(text: 'If your language is set to French or Spanish, here\'s the word "Hello !" in your language :\n'),
                 TextSpan(
                   text: context.getString('hello'),
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                TextSpan(
-                    text:
-                        '\n(Otherwise it should display a simple "Hello !".)\n\n'),
-                TextSpan(
-                    text: 'Oh, and here\'s an apple : ' +
-                        context.getString('fruits.apple')! +
-                        '.'),
+                const TextSpan(text: '\n(Otherwise it should display a simple "Hello !".)\n\n'),
+                TextSpan(text: 'Oh, and here\'s an apple : ${context.getString('fruits.apple')}.'),
               ],
-              style: TextStyle(fontSize: 18, color: Colors.black87),
+              style: const TextStyle(fontSize: 18, color: Colors.black87),
             ),
             textAlign: TextAlign.center,
           ),
@@ -82,8 +74,7 @@ class _EzLocalizationDemoWidget extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10),
             child: ElevatedButton(
               child: Text('Switch to "${nextLocale.languageCode}"'),
-              onPressed: () =>
-                  EzLocalizationBuilder.of(context)!.changeLocale(nextLocale),
+              onPressed: () => EzLocalizationBuilder.of(context)!.changeLocale(nextLocale),
             ),
           ),
         ],
@@ -96,11 +87,11 @@ class _EzLocalizationDemoWidget extends StatelessWidget {
     String lang = EzLocalization.of(context)!.locale.languageCode;
     switch (lang) {
       case 'en':
-        return Locale('fr');
+        return const Locale('fr');
       case 'fr':
-        return Locale('es');
+        return const Locale('es');
       case 'es':
-        return Locale('en');
+        return const Locale('en');
     }
     return null;
   }
