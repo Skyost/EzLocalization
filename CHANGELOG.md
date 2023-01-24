@@ -1,3 +1,9 @@
+## [1.1.0] - 2023-01-24
+
+* `EzLocalization.DEFAULT_NOT_FOUND_STRING` renamed to `EzLocalization.defaultNotFoundString`.
+* `EzLocalizationBuilderState.changeLocale` now accepts a `null` parameter.
+* Various fixes and improvements.
+
 ## [1.0.0+2] - 2021-03-18
 
 * You can get the default `notFoundString` by calling `EzLocalization.DEFAULT_NOT_FOUND_STRING`.

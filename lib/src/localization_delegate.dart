@@ -22,13 +22,12 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
   const EzLocalizationDelegate({
     this.supportedLocales = const [Locale('en')],
     this.getPathFunction = EzLocalization.defaultGetPathFunction,
-    this.notFoundString = EzLocalization.DEFAULT_NOT_FOUND_STRING,
+    this.notFoundString = EzLocalization.defaultNotFoundString,
     this.locale,
   });
 
   @override
-  bool isSupported(Locale locale) =>
-      _isLocaleSupported(supportedLocales, locale) != null;
+  bool isSupported(Locale locale) => _isLocaleSupported(supportedLocales, locale) != null;
 
   @override
   Future<EzLocalization> load(Locale locale) async {
@@ -58,8 +57,7 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
       return supportedLocales.first;
     }
 
-    return _isLocaleSupported(supportedLocales, locale) ??
-        supportedLocales.first;
+    return _isLocaleSupported(supportedLocales, locale) ?? supportedLocales.first;
   }
 
   /// The localization delegates to add in your application.
@@ -73,8 +71,7 @@ class EzLocalizationDelegate extends LocalizationsDelegate<EzLocalization> {
   /// Returns the locale if it's supported by this localization delegate, null otherwise.
   Locale? _isLocaleSupported(Iterable<Locale> supportedLocales, Locale locale) {
     for (Locale supportedLocale in supportedLocales) {
-      if (supportedLocale.languageCode == locale.languageCode ||
-          supportedLocale.countryCode == locale.countryCode) {
+      if (supportedLocale.languageCode == locale.languageCode || supportedLocale.countryCode == locale.countryCode) {
         return supportedLocale;
       }
     }

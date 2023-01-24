@@ -2,16 +2,17 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 /// Callback allowing to get the language path according to the specified locale.
-typedef String GetPathFunction(Locale locale);
+typedef GetPathFunction = String Function(Locale locale);
 
 /// The EzLocalization class.
 class EzLocalization {
   /// The default [notFoundString].
-  static const DEFAULT_NOT_FOUND_STRING = '(?)';
+  static const defaultNotFoundString = '(?)';
 
   /// The current locale.
   final Locale locale;
@@ -33,8 +34,7 @@ class EzLocalization {
   });
 
   /// Returns the EzLocalization instance attached to the specified build config.
-  static EzLocalization? of(BuildContext context) =>
-      Localizations.of<EzLocalization>(context, EzLocalization);
+  static EzLocalization? of(BuildContext context) => Localizations.of<EzLocalization>(context, EzLocalization);
 
   /// Loads the localized strings.
   Future<bool> load() async {
@@ -44,15 +44,17 @@ class EzLocalization {
       strings.forEach((String key, dynamic data) => _addValues(key, data));
       return true;
     } catch (exception, stacktrace) {
-      print(exception);
-      print(stacktrace);
+      if (kDebugMode) {
+        print(exception);
+        print(stacktrace);
+      }
     }
     return false;
   }
 
   /// Returns the string associated to the specified key.
   String get(String key, [dynamic args]) {
-    String? value = this._strings[key];
+    String? value = _strings[key];
     if (value == null) {
       return notFoundString;
     }
@@ -65,14 +67,12 @@ class EzLocalization {
   }
 
   /// The default get path function.
-  static String defaultGetPathFunction(Locale locale) =>
-      'assets/languages/${locale.languageCode}.json';
+  static String defaultGetPathFunction(Locale locale) => 'assets/languages/${locale.languageCode}.json';
 
   /// Adds the values to the current map.
   void _addValues(String key, dynamic data) {
     if (data is Map) {
-      data.forEach(
-          (subKey, subData) => _addValues(key + '.' + subKey, subData));
+      data.forEach((subKey, subData) => _addValues('$key.$subKey', subData));
       return;
     }
 
@@ -85,12 +85,10 @@ class EzLocalization {
   String _formatReturnValue(String value, dynamic arguments) {
     if (arguments is List) {
       for (int i = 0; i < arguments.length; i++) {
-        value =
-            value.replaceAll('{' + i.toString() + '}', arguments[i].toString());
+        value = value.replaceAll('{$i}', arguments[i].toString());
       }
     } else if (arguments is Map) {
-      arguments.forEach((formatKey, formatValue) => value = value.replaceAll(
-          '{' + formatKey.toString() + '}', formatValue.toString()));
+      arguments.forEach((formatKey, formatValue) => value = value.replaceAll('{$formatKey}', formatValue.toString()));
     }
     return value;
   }
