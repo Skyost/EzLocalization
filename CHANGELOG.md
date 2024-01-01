@@ -1,3 +1,7 @@
+## [1.1.0] - 2024-01-01
+
+* Updated dependencies.
+
 ## [1.1.0] - 2023-01-24
 
 * `EzLocalization.DEFAULT_NOT_FOUND_STRING` renamed to `EzLocalization.defaultNotFoundString`.
